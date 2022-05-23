@@ -8,25 +8,25 @@
 import Foundation
 import ISEmojiView
 
-class EmojiKeyboardFromStoryboard: UIViewController, EmojiViewDelegate {
+class EmojiKeyboardFromStoryboard: UIViewController {
     
     // MARK: - IBOutlets
     
     @IBOutlet private weak var textView: UITextView!
     @IBOutlet private weak var emojiView: EmojiView! {
         didSet {
-            emojiView.delegate = self
+//            emojiView.delegate = self
         }
     }
     
     // MARK: - EmojiViewDelegate
     
-    func emojiViewDidSelectEmoji(_ emoji: String, emojiView: EmojiView) {
-        textView.insertText(emoji)
-    }
-    
-    func emojiViewDidPressDeleteBackwardButton(_ emojiView: EmojiView) {
-        textView.deleteBackward()
-    }
+//    func emojiViewDidSelectEmoji(_ emoji: String, emojiView: EmojiView) {
+//        textView.insertText(emoji)
+//    }
+//
+//    func emojiViewDidPressDeleteBackwardButton(_ emojiView: EmojiView) {
+//        textView.deleteBackward()
+//    }
     
 }

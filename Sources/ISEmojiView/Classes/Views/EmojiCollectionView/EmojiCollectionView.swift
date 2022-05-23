@@ -285,7 +285,26 @@ extension EmojiCollectionView {
         let emojiLongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(emojiLongPressHandle))
         addGestureRecognizer(emojiLongPressGestureRecognizer)
         
+        let tapgestureecognizer = UITapGestureRecognizer(target: self, action: #selector(emojiTapped))
+        addGestureRecognizer(tapgestureecognizer)
         addSubview(emojiPopView)
+    }
+    
+    @objc private func emojiTapped(sender: UILongPressGestureRecognizer) {
+        func PressLocationInEdge(_ location: CGPoint) -> Bool {
+            let edgeRect = collectionView.bounds.inset(by: collectionView.contentInset)
+            return edgeRect.contains(location)
+        }
+        
+        let location = sender.location(in: collectionView)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: location) else {
+            return
+        }
+        
+        let emojiCategory = emojis[indexPath.section]
+        let emoji = emojiCategory.emojis[indexPath.item]
+        delegate?.emojiViewDidSelectEmoji(emojiView: self, emoji: emoji, selectedEmoji: emoji.selectedEmoji ?? emoji.emoji)
     }
     
     @objc private func emojiLongPressHandle(sender: UILongPressGestureRecognizer) {
