@@ -63,6 +63,9 @@ internal class EmojiCollectionView: UIView {
     @IBOutlet private weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(EmojiCollectionCell.self, forCellWithReuseIdentifier: emojiCellReuseIdentifier)
+            collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+            let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+            layout?.sectionHeadersPinToVisibleBounds = true
         }
     }
     
@@ -142,6 +145,34 @@ extension EmojiCollectionView: UICollectionViewDataSource {
         return emojis[section].emojis.count
     }
     
+        internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let attributedString = NSAttributedString(string: emojis[section].category.title, attributes: [
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+        ])
+        let labelSize = labelSize(for: attributedString)
+        return CGSize(width: labelSize.width, height: 20)
+    }
+    
+    internal func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+             let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
+            sectionHeader.label.text = emojis[indexPath.section].category.title.uppercased()
+             return sectionHeader
+        } else { //No footer in this case but can add option for that
+             return UICollectionReusableView()
+        }
+    }
+    
+    private func labelSize(for attributedText: NSAttributedString, considering maxWidth: CGFloat = UIScreen.main.bounds.width) -> CGSize {
+        let constraintBox = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
+        let rect = attributedText.boundingRect(with: constraintBox,
+                                               options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics], context: nil).integral
+        var messageContainerSize = CGSize()
+        messageContainerSize = rect.size
+        messageContainerSize.width += 24
+        return messageContainerSize
+    }
+    
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let emojiCategory = emojis[indexPath.section]
         let emoji = emojiCategory.emojis[indexPath.item]
@@ -195,24 +226,19 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         var inset = UIEdgeInsets.zero
-        
-        if let recentsEmojis = emojis.first(where: { $0.category == Category.recents }) {
-            if (!recentsEmojis.emojis.isEmpty && section != 0) || (recentsEmojis.emojis.isEmpty && section > 1) {
-                inset.left = 15
-            }
-        }
-        
-        if section == 0 {
-            inset.left = 3
-        }
+        inset.left = 24
+        inset.top = 20
+        let attributedString = NSAttributedString(string: emojis[section].category.title.uppercased(), attributes: [
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+        ])
+        let labelSize = labelSize(for: attributedString)
+        inset.left += -labelSize.width
         
         if section == emojis.count - 1 {
             inset.right = 4
         }
-        
         return inset
     }
-    
 }
 
 // MARK: - UIScrollView
@@ -315,4 +341,28 @@ extension EmojiCollectionView {
         emojiPopView.currentEmoji = ""
     }
     
+}
+
+
+class SectionHeader: UICollectionReusableView {
+     var label: UILabel = {
+         let label: UILabel = UILabel()
+         label.textColor = .white
+         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+         label.sizeToFit()
+         return label
+     }()
+
+     override init(frame: CGRect) {
+         super.init(frame: frame)
+         addSubview(label)
+         label.translatesAutoresizingMaskIntoConstraints = false
+         label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+         label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13).isActive = true
+         label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
