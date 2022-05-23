@@ -347,7 +347,7 @@ extension EmojiCollectionView {
 class SectionHeader: UICollectionReusableView {
      var label: UILabel = {
          let label: UILabel = UILabel()
-         label.textColor = .white
+         label.textColor = UIColor(red: 145/255, green: 145/255, blue: 145/255, alpha: 1.0)
          label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
          label.sizeToFit()
          return label
