@@ -12,7 +12,7 @@ import Foundation
     // MARK: - Public variables
     
     /// false if you want update recent emoji every popup.
-    public var updateRecentEmojiImmediately:Bool = true
+    @objc public var updateRecentEmojiImmediately:Bool = true
     
     /// Type of bottom view. Default is `.pageControl`.
     public var bottomType: BottomType! = .pageControl
@@ -21,20 +21,20 @@ import Foundation
     public var customEmojis: [EmojiCategory]?
     
     /// Long press to pop preview effect like iOS10 system emoji keyboard. Default is true.
-    public var isShowPopPreview: Bool = true
+    @objc public var isShowPopPreview: Bool = true
     
     /// The max number of recent emojis, if set 0, nothing will be shown. Default is 50.
-    public var countOfRecentsEmojis: Int = MaxCountOfRecentsEmojis
+    @objc public var countOfRecentsEmojis: Int = MaxCountOfRecentsEmojis
     
     /// Need to show change keyboard button
     /// This button is located in `Categories` bottom view.
     /// Default is false.
-    public var needToShowAbcButton: Bool = false
+    @objc public var needToShowAbcButton: Bool = false
     
     // MARK: - Init functions
     
-    public init(bottomType: BottomType) {
-        self.bottomType = bottomType
+    public override init() {
+        self.bottomType = .categories
     }
     
 }

@@ -29,7 +29,7 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
             textView!.textColor = .label
         }
         
-        let keyboardSettings = KeyboardSettings(bottomType: bottomType)
+        let keyboardSettings = KeyboardSettings()
         keyboardSettings.customEmojis = emojis
         keyboardSettings.countOfRecentsEmojis = 20
         keyboardSettings.updateRecentEmojiImmediately = true

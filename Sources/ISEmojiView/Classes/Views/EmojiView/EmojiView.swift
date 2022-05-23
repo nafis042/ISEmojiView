@@ -12,7 +12,7 @@ public enum BottomType: Int {
     case pageControl, categories
 }
 
-public protocol EmojiViewDelegate: AnyObject {
+@objc public protocol EmojiViewDelegate: AnyObject {
     
     func emojiViewDidSelectEmoji(_ emoji: String, emojiView: EmojiView)
     func emojiViewDidPressChangeKeyboardButton(_ emojiView: EmojiView)
@@ -104,7 +104,7 @@ public extension EmojiViewDelegate {
         setupSubviews()
     }
     
-    public init(keyboardSettings: KeyboardSettings) {
+    @objc public init(keyboardSettings: KeyboardSettings) {
         super.init(frame: .zero)
         
         self.keyboardSettings = keyboardSettings
