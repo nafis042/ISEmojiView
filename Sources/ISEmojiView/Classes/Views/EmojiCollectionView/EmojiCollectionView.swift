@@ -29,7 +29,7 @@ internal protocol EmojiCollectionViewDelegate: class {
 }
 
 /// A emoji keyboard view
-internal class EmojiCollectionView: UIView {
+@objc internal class EmojiCollectionView: UIView {
     
     // MARK: - Public variables
     

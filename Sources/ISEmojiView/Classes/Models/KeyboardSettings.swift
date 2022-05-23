@@ -7,7 +7,7 @@
 
 import Foundation
 
-final public class KeyboardSettings {
+@objc final public class KeyboardSettings: NSObject {
     
     // MARK: - Public variables
     
