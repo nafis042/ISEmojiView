@@ -36,6 +36,7 @@ final internal class CategoriesBottomView: UIView {
     internal var themeColorScheme: UIColor = .black {
         didSet {
             changeKeyboardButton.setTitleColor(themeColorScheme, for: .normal)
+            deleteButton.tintColor = themeColorScheme
         }
     }
     
