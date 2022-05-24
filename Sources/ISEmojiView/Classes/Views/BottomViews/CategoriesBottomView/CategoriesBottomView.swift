@@ -39,6 +39,8 @@ final internal class CategoriesBottomView: UIView {
         }
     }
     
+    internal var themeBackgroundColor: UIColor = .black
+    
     internal var categories: [Category]! {
         didSet {
             collectionView.reloadData()
@@ -158,7 +160,7 @@ extension CategoriesBottomView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         cell.setEmojiCategory(categories[indexPath.item])
-        cell.setColorScheme(themeColorScheme)
+        cell.setColorScheme(themeColorScheme, themeBackgroundColor)
         return cell
     }
     

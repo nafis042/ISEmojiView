@@ -38,6 +38,7 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
         emojiView.translatesAutoresizingMaskIntoConstraints = false
         emojiView.delegate = self
         emojiView.themeColorScheme = .black
+        emojiView.themeBackgroundColor = .red
         textView.inputView = emojiView
     }
     

@@ -80,18 +80,17 @@ internal class CategoryCell: UICollectionViewCell {
         emojiImageView.image = image?.withRenderingMode(.alwaysTemplate)
     }
     
-    internal func setColorScheme(_ color: UIColor) {
+    internal func setColorScheme(_ color: UIColor, _ backgroundColor: UIColor) {
         if color == .black {
             // light theme
             ImageActiveTintColor = .black
             ImageNonActiveTintColor = .lightGray
-            highlightedBackgroundView.backgroundColor = .lightGray
         } else {
             // dark theme
             ImageActiveTintColor = .white
             ImageNonActiveTintColor = .darkGray
-            highlightedBackgroundView.backgroundColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
         }
+        highlightedBackgroundView.backgroundColor = backgroundColor
         emojiImageView.tintColor = isSelected ? ImageActiveTintColor : ImageNonActiveTintColor
     }
     

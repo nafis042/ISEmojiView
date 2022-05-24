@@ -79,6 +79,12 @@ public extension EmojiViewDelegate {
         }
     }
     
+    @objc public var themeBackgroundColor: UIColor = .black {
+        didSet {
+            categoriesBottomView?.themeBackgroundColor = themeBackgroundColor
+        }
+    }
+    
     // MARK: - Public variables
     
     @objc public weak var delegate: EmojiViewDelegate?
