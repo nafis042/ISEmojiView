@@ -73,15 +73,14 @@ public extension EmojiViewDelegate {
         }
     }
     
-    @objc public var themeColorScheme: UIColor = .black {
+    @objc public var theme: Theme? {
         didSet {
-            categoriesBottomView?.themeColorScheme = themeColorScheme
-        }
-    }
-    
-    @objc public var themeBackgroundColor: UIColor = .black {
-        didSet {
-            categoriesBottomView?.themeBackgroundColor = themeBackgroundColor
+            guard theme != nil else {
+                return
+            }
+            categoriesBottomView?.themeColorScheme = theme!.textColor
+            categoriesBottomView?.themeBackgroundColor = theme!.normalKeyBackgroundColor
+            emojiCollectionView?.theme = theme!
         }
     }
     

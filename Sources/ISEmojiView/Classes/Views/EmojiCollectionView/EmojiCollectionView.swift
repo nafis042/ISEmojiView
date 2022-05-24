@@ -45,6 +45,14 @@ internal protocol EmojiCollectionViewDelegate: class {
         }
     }
     
+    public var theme: Theme? {
+        didSet {
+            if theme != nil {
+                emojiPopView.theme = theme
+            }
+        }
+    }
+    
     // MARK: - Private variables
     
     private var scrollViewWillBeginDragging = false

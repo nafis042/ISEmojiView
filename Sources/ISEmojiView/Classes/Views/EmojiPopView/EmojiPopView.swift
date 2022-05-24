@@ -35,6 +35,12 @@ internal class EmojiPopView: UIView {
     private var emojisX: CGFloat = 0.0
     private var emojisWidth: CGFloat = 0.0
     
+    public var theme: Theme? {
+        didSet {
+            
+        }
+    }
+    
     // MARK: - Init functions
     
     init() {
@@ -96,7 +102,7 @@ extension EmojiPopView {
             let previouslySelectedButton = emojiButtons.first { $0.isSelected }
             emojiButtons.forEach {
                 $0.isSelected = $0.frame.insetBy(dx: 0, dy: -80).contains(point)
-                $0.backgroundColor = $0.isSelected ? .systemBlue : .clear
+                $0.backgroundColor = $0.isSelected ? theme!.popupSelectedSelectedBackgroundColor : .clear
             }
             let selectedButton = emojiButtons.first { $0.isSelected }
             if let selectedButton = selectedButton, selectedButton != previouslySelectedButton {
@@ -161,8 +167,13 @@ extension EmojiPopView {
         // border
         let borderLayer = CAShapeLayer()
         borderLayer.path = path
-        borderLayer.strokeColor = UIColor(white: 0.8, alpha: 1).cgColor
-        borderLayer.fillColor = UIColor.white.cgColor
+        if theme != nil {
+            borderLayer.strokeColor = theme!.popupBackgroundColor.withAlphaComponent(0.8).cgColor
+            borderLayer.fillColor = theme!.popupBackgroundColor.cgColor
+        } else {
+            borderLayer.strokeColor = UIColor(white: 0.8, alpha: 1).cgColor
+            borderLayer.fillColor = UIColor.white.cgColor
+        }
         borderLayer.lineWidth = 1
         layer.addSublayer(borderLayer)
         
@@ -173,7 +184,11 @@ extension EmojiPopView {
         // content layer
         let contentLayer = CALayer()
         contentLayer.frame = bounds
-        contentLayer.backgroundColor = UIColor.white.cgColor
+        if theme != nil {
+            contentLayer.backgroundColor = theme?.popupBackgroundColor.cgColor
+        } else {
+            contentLayer.backgroundColor = UIColor.white.cgColor
+        }
         contentLayer.mask = maskLayer
         layer.addSublayer(contentLayer)
         
