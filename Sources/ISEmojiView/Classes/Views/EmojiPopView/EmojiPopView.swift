@@ -168,10 +168,8 @@ extension EmojiPopView {
         let borderLayer = CAShapeLayer()
         borderLayer.path = path
         if theme != nil {
-            borderLayer.strokeColor = theme!.popupBackgroundColor.withAlphaComponent(0.8).cgColor
             borderLayer.fillColor = theme!.popupBackgroundColor.cgColor
         } else {
-            borderLayer.strokeColor = UIColor(white: 0.8, alpha: 1).cgColor
             borderLayer.fillColor = UIColor.white.cgColor
         }
         borderLayer.lineWidth = 1
@@ -204,6 +202,12 @@ extension EmojiPopView {
         }
         
         addSubview(emojisView)
+        if theme != nil {
+            self.layer.shadowColor = theme!.shadowColor.cgColor
+            self.layer.shadowOpacity = 0.5
+            self.layer.shadowOffset = CGSize(width: 0.1, height: 0.5)
+            self.layer.shadowRadius = 2
+        }
     }
     
     func maskPath() -> CGMutablePath {

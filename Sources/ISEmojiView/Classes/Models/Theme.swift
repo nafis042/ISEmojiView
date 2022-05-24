@@ -7,7 +7,8 @@
 
 import UIKit
 
-@objc public class Theme : NSObject {
+@objc(ThemeData)
+public class Theme : NSObject {
     
     @objc let name: String
     @objc let key: String

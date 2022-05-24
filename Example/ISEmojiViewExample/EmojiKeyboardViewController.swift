@@ -52,7 +52,7 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
             popupBackgroundColor: UIColor(hex: "#434343")!,
             popupSelectedSelectedBackgroundColor: .black.withAlphaComponent(0.15),
             popupShadowColor: .black.withAlphaComponent(0.25),
-            popupStrokeColor: .clear,
+            popupStrokeColor: .red.withAlphaComponent(0.3),
             normalKeyBackgroundColor: UIColor(hex: "#434343")!,
             specialKeyBackgroundColor: UIColor(hex: "#252424")!,
             shadowColor: .black,
