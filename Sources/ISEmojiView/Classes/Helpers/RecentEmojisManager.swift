@@ -71,13 +71,40 @@ final internal class RecentEmojisManager {
         return data
     }
     
+    let dummyEmoji = [
+        Emoji(emojis: ["😀"]),
+        Emoji(emojis: ["😂"]),
+        Emoji(emojis: ["😅"]),
+        Emoji(emojis: ["🤩"]),
+        Emoji(emojis: ["😪"]),
+        Emoji(emojis: ["😰"]),
+        Emoji(emojis: ["👿"]),
+        Emoji(emojis: ["😻"]),
+        Emoji(emojis: ["👑"]),
+        Emoji(emojis: ["🍓"]),
+        Emoji(emojis: ["🍕"]),
+        Emoji(emojis: ["🍔"]),
+        Emoji(emojis: ["☕️"]),
+        Emoji(emojis: ["⚽️"]),
+        Emoji(emojis: ["🏸"]),
+        Emoji(emojis: ["🎾"]),
+        Emoji(emojis: ["🏆"]),
+        Emoji(emojis: ["🎹"]),
+        Emoji(emojis: ["🎸"]),
+        Emoji(emojis: ["🇧🇩"]),
+        Emoji(emojis: ["🚗"]),
+        Emoji(emojis: ["🚜"]),
+        Emoji(emojis: ["✈️"]),
+        Emoji(emojis: ["🏝"]),
+    ]
+    
     internal func recentEmojis() -> [Emoji] {
         guard let data = UserDefaults.standard.data(forKey: recentEmojisKey) else {
-            return []
+            return dummyEmoji
         }
         
         guard let emojis = try? JSONDecoder().decode([Emoji].self, from: data) else {
-            return []
+            return dummyEmoji
         }
         let freqData = recentEmojisFreqData()
         let seq = emojis.sorted {
@@ -85,7 +112,17 @@ final internal class RecentEmojisManager {
             let right = freqData[$1.selectedEmoji ?? ""] ?? 0
             return left > right
         }
+        if seq.count < 20 {
+            var filteredDummyEmoji: [Emoji] = []
+            for emoji in dummyEmoji {
+                for element in seq {
+                    if element.emoji != emoji.emoji {
+                        filteredDummyEmoji.append(emoji)
+                    }
+                }
+            }
+            return seq + filteredDummyEmoji
+        }
         return seq
     }
-    
 }

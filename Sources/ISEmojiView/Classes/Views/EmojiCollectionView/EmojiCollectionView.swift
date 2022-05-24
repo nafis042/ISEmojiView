@@ -136,7 +136,12 @@ internal protocol EmojiCollectionViewDelegate: class {
         }
         
         let indexPath = IndexPath(item: 0, section: section)
-        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+//        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        if let attributes = collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath),
+                let cellAttributes = self.collectionView?.layoutAttributesForItem(at: indexPath) {
+            let scrollingPosition = CGPoint(x: cellAttributes.frame.origin.x  - collectionView.contentInset.left, y: 0.0)
+                collectionView.setContentOffset(scrollingPosition, animated: true)
+        }
     }
     
 }
@@ -154,7 +159,7 @@ extension EmojiCollectionView: UICollectionViewDataSource {
     }
     
         internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let attributedString = NSAttributedString(string: emojis[section].category.title, attributes: [
+            let attributedString = NSAttributedString(string: emojis[section].category.title.uppercased(), attributes: [
             .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
         ])
         let labelSize = labelSize(for: attributedString)
@@ -177,7 +182,7 @@ extension EmojiCollectionView: UICollectionViewDataSource {
                                                options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics], context: nil).integral
         var messageContainerSize = CGSize()
         messageContainerSize = rect.size
-        messageContainerSize.width += 24
+        messageContainerSize.width += 45
         return messageContainerSize
     }
     
@@ -234,22 +239,14 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         var inset = UIEdgeInsets.zero
-        inset.left = 24
+        inset.left = 0
         inset.top = 20
+        inset.right = 32
         let attributedString = NSAttributedString(string: emojis[section].category.title.uppercased(), attributes: [
             .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
         ])
         let labelSize = labelSize(for: attributedString)
-        inset.left += -labelSize.width
-        
-        if section == emojis.count - 1 {
-            inset.right = 4
-        }
-        if let recentsEmojis = emojis.first(where: { $0.category == Category.recents }) {
-            if (recentsEmojis.emojis.count <= 10) {
-                inset.left += 40
-            }
-        }
+        inset.left -= labelSize.width
         return inset
     }
 }
@@ -405,7 +402,7 @@ class SectionHeader: UICollectionReusableView {
          label.translatesAutoresizingMaskIntoConstraints = false
          label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
          label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13).isActive = true
-         label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+         label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

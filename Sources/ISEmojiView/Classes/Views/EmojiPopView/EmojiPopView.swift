@@ -203,7 +203,7 @@ extension EmojiPopView {
         
         addSubview(emojisView)
         if theme != nil {
-            self.layer.shadowColor = theme!.shadowColor.cgColor
+            self.layer.shadowColor = UIColor.black.cgColor
             self.layer.shadowOpacity = 0.5
             self.layer.shadowOffset = CGSize(width: 0.1, height: 0.5)
             self.layer.shadowRadius = 2

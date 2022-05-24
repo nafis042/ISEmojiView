@@ -37,8 +37,12 @@ final internal class CategoriesBottomView: UIView {
         didSet {
             changeKeyboardButton.setTitleColor(themeColorScheme, for: .normal)
             deleteButton.tintColor = themeColorScheme
+            collectionView.reloadData()
+            collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .centeredHorizontally)
         }
     }
+    
+    var selectedIndexPath = IndexPath(row: 0, section: 0)
     
     internal var themeBackgroundColor: UIColor = .black
     
@@ -172,6 +176,7 @@ extension CategoriesBottomView: UICollectionViewDataSource {
 extension CategoriesBottomView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
         delegate?.categoriesBottomViewDidSelecteCategory(categories[indexPath.item], bottomView: self)
     }
     
