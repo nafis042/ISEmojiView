@@ -75,7 +75,7 @@ public extension EmojiViewDelegate {
     
     // MARK: - Public variables
     
-    public weak var delegate: EmojiViewDelegate?
+    @objc public weak var delegate: EmojiViewDelegate?
     
     // MARK: - Private variables
     
@@ -216,12 +216,7 @@ extension EmojiView: CategoriesBottomViewDelegate {
 extension EmojiView {
     
     private func setupView() {
-        if #available(iOS 13, *) {
-            // Support "Dark Mode"
-            backgroundColor = .secondarySystemBackground
-        } else {
-            backgroundColor = UIColor(red: 249/255.0, green: 249/255.0, blue: 249/255.0, alpha: 1)
-        }
+        backgroundColor = .clear
     }
     
     private func setupSubviews() {

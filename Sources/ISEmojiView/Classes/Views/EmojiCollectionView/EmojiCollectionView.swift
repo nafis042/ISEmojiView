@@ -322,31 +322,45 @@ extension EmojiCollectionView {
             return
         }
         
-        guard let indexPath = collectionView.indexPathForItem(at: location) else {
-            return
-        }
+        switch sender.state {
+        case .began:
+            guard let indexPath = collectionView.indexPathForItem(at: location) else {
+                return
+            }
+            
+            guard let attr = collectionView.layoutAttributesForItem(at: indexPath) else {
+                return
+            }
         
-        guard let attr = collectionView.layoutAttributesForItem(at: indexPath) else {
-            return
+            let emojiCategory = emojis[indexPath.section]
+            let emoji = emojiCategory.emojis[indexPath.item]
+            
+            if sender.state == .ended && emoji.emojis.count == 1 {
+                dismissPopView(true)
+                return
+            }
+            
+            emojiPopView.setEmoji(emoji)
+            
+            let cellRect = attr.frame
+            let cellFrameInSuperView = collectionView.convert(cellRect, to: self)
+            let emojiPopLocation = CGPoint(
+                x: cellFrameInSuperView.origin.x - ((TopPartSize.width - BottomPartSize.width) / 2.0) + 5,
+                y: cellFrameInSuperView.origin.y - TopPartSize.height - 10
+            )
+            emojiPopView.move(location: emojiPopLocation, animation: sender.state != .began)
+            if emoji.emojis.count > 1 {
+                ImpactHapticFeedback.impactOccured(style: .light)
+            }
+        case .changed:
+            emojiPopView.didChangeLongPress(sender)
+        case .ended:
+            print("long touch ended")
+            emojiPopView.didEndLongPress(sender)
+        default:
+            break
         }
     
-        let emojiCategory = emojis[indexPath.section]
-        let emoji = emojiCategory.emojis[indexPath.item]
-        
-        if sender.state == .ended && emoji.emojis.count == 1 {
-            dismissPopView(true)
-            return
-        }
-        
-        emojiPopView.setEmoji(emoji)
-        
-        let cellRect = attr.frame
-        let cellFrameInSuperView = collectionView.convert(cellRect, to: self)
-        let emojiPopLocation = CGPoint(
-            x: cellFrameInSuperView.origin.x - ((TopPartSize.width - BottomPartSize.width) / 2.0) + 5,
-            y: cellFrameInSuperView.origin.y - TopPartSize.height - 10
-        )
-        emojiPopView.move(location: emojiPopLocation, animation: sender.state != .began)
     }
     
     private func dismissPopView(_ usePopViewEmoji: Bool) {

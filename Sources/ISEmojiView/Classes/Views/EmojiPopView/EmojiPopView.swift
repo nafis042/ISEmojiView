@@ -90,11 +90,41 @@ internal class EmojiPopView: UIView {
 
 extension EmojiPopView {
     
+    func didChangeLongPress(_ sender: UILongPressGestureRecognizer) {
+        guard emojiButtons.count > 1 else { return }
+            let point = sender.location(in: emojisView)
+            let previouslySelectedButton = emojiButtons.first { $0.isSelected }
+            emojiButtons.forEach {
+                $0.isSelected = $0.frame.insetBy(dx: 0, dy: -80).contains(point)
+                $0.backgroundColor = $0.isSelected ? .systemBlue : .clear
+            }
+            let selectedButton = emojiButtons.first { $0.isSelected }
+            if let selectedButton = selectedButton, selectedButton != previouslySelectedButton {
+                SelectionHapticFeedback().selectionChanged()
+            }
+    }
+
+    func didEndLongPress(_ sender: UILongPressGestureRecognizer) {
+//        guard emojiButtons.count > 1 else { return }
+
+        let point = sender.location(in: emojisView)
+        if self.frame.contains(sender.location(in: self)) {
+            // Do nothing.
+        } else if let selectedButton = emojiButtons.first(where: {
+            $0.frame.insetBy(dx: 0, dy: -80).contains(point)
+        }) {
+            selectedButton.sendActions(for: .touchUpInside)
+        } else {
+            dismiss()
+        }
+    }
+    
     private func createEmojiButton(_ emoji: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.titleLabel?.font = EmojiFont
         button.setTitle(emoji, for: .normal)
         button.frame = CGRect(x: CGFloat(emojiButtons.count) * EmojiSize.width, y: 0, width: EmojiSize.width, height: EmojiSize.height)
+        button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(selectEmojiType(_:)), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         return button
@@ -187,5 +217,48 @@ extension EmojiPopView {
         )
         
         return path
+    }
+}
+
+public class SelectionHapticFeedback {
+    let selectionFeedbackGenerator: UISelectionFeedbackGenerator
+
+    public init() {
+//        AssertIsOnMainThread()
+
+        selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+        selectionFeedbackGenerator.prepare()
+    }
+
+    public func selectionChanged() {
+        DispatchQueue.main.async {
+            self.selectionFeedbackGenerator.selectionChanged()
+            self.selectionFeedbackGenerator.prepare()
+        }
+    }
+}
+
+public class ImpactHapticFeedback: NSObject {
+    @objc
+    public class func impactOccured(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        DispatchQueue.main.async {
+            let generator = UIImpactFeedbackGenerator(style: style)
+            generator.prepare()
+            generator.impactOccurred()
+        }
+    }
+
+    @objc
+    public class func impactOccured(style: UIImpactFeedbackGenerator.FeedbackStyle, intensity: CGFloat) {
+        DispatchQueue.main.async {
+            let generator = UIImpactFeedbackGenerator(style: style)
+            generator.prepare()
+            if #available(iOS 13.0, *) {
+                generator.impactOccurred(intensity: intensity)
+            } else {
+                // Fallback on earlier versions
+                generator.impactOccurred()
+            }
+        }
     }
 }
