@@ -237,6 +237,11 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
         if section == emojis.count - 1 {
             inset.right = 4
         }
+        if let recentsEmojis = emojis.first(where: { $0.category == Category.recents }) {
+            if (recentsEmojis.emojis.count <= 10) {
+                inset.left += 40
+            }
+        }
         return inset
     }
 }

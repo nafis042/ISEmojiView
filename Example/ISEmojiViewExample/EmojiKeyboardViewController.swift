@@ -32,11 +32,12 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
         let keyboardSettings = KeyboardSettings()
         keyboardSettings.customEmojis = emojis
         keyboardSettings.countOfRecentsEmojis = 20
-        keyboardSettings.updateRecentEmojiImmediately = true
+        keyboardSettings.updateRecentEmojiImmediately = false
         keyboardSettings.needToShowAbcButton = true
         let emojiView = EmojiView(keyboardSettings: keyboardSettings)
         emojiView.translatesAutoresizingMaskIntoConstraints = false
         emojiView.delegate = self
+        emojiView.themeColorScheme = .black
         textView.inputView = emojiView
     }
     

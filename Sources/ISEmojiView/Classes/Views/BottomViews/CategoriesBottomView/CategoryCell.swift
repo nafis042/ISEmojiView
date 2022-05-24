@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 private let HighlightedBackgroundViewSize = CGFloat(30)
-private let ImageActiveTintColor =  UIColor(red: 95/255, green: 94/255, blue: 95/255, alpha: 1)
-private let ImageNonActiveTintColor = UIColor(red: 161/255, green: 165/255, blue: 172/255, alpha: 1)
+private var ImageActiveTintColor =  UIColor(red: 95/255, green: 94/255, blue: 95/255, alpha: 1)
+private var ImageNonActiveTintColor = UIColor(red: 161/255, green: 165/255, blue: 172/255, alpha: 1)
 
 internal class CategoryCell: UICollectionViewCell {
     
@@ -18,11 +18,7 @@ internal class CategoryCell: UICollectionViewCell {
     
     private var highlightedBackgroundView: UIView = {
         let view = UIView()
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemFill
-        } else {
-            view.backgroundColor = UIColor(red: 201/255, green: 206/255, blue: 214/255, alpha: 1)
-        }
+        view.backgroundColor = UIColor(red: 201/255, green: 206/255, blue: 214/255, alpha: 1)
         view.isHidden = true
         return view
     }()
@@ -49,23 +45,15 @@ internal class CategoryCell: UICollectionViewCell {
     override var isHighlighted: Bool {
         didSet {
             highlightedBackgroundView.isHidden = !isHighlighted
-            if #available(iOS 13.0, *) {
-                emojiImageView.tintColor = isHighlighted ? .label : .secondaryLabel
-            } else {
-                emojiImageView.tintColor = isHighlighted ? ImageActiveTintColor : ImageNonActiveTintColor
-            }
-            
+            emojiImageView.tintColor = isHighlighted ? ImageActiveTintColor : ImageNonActiveTintColor
         }
     }
     
     override var isSelected: Bool {
         didSet {
             highlightedBackgroundView.isHidden = !isSelected
-            if #available(iOS 13.0, *) {
-                emojiImageView.tintColor = isSelected ? .label : .secondaryLabel
-            } else {
-                emojiImageView.tintColor = isSelected ? ImageActiveTintColor : ImageNonActiveTintColor
-            }
+            emojiImageView.tintColor = isSelected ? ImageActiveTintColor : ImageNonActiveTintColor
+            
         }
     }
     
@@ -90,6 +78,21 @@ internal class CategoryCell: UICollectionViewCell {
         
         image = UIImage(named: category.iconName, in: Bundle.podBundle, compatibleWith: nil)
         emojiImageView.image = image?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    internal func setColorScheme(_ color: UIColor) {
+        if color == .black {
+            // light theme
+            ImageActiveTintColor = .black
+            ImageNonActiveTintColor = .lightGray
+            highlightedBackgroundView.backgroundColor = .lightGray
+        } else {
+            // dark theme
+            ImageActiveTintColor = .white
+            ImageNonActiveTintColor = .darkGray
+            highlightedBackgroundView.backgroundColor = UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1.0)
+        }
+        emojiImageView.tintColor = isSelected ? ImageActiveTintColor : ImageNonActiveTintColor
     }
     
     // MARK: - Private functions

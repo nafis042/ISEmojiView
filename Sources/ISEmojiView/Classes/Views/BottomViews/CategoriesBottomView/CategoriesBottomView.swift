@@ -33,6 +33,11 @@ final internal class CategoriesBottomView: UIView {
             collectionViewToSuperViewLeadingConstraint.priority = showAbcButton ? .defaultHigh : .defaultLow
         }
     }
+    internal var themeColorScheme: UIColor = .black {
+        didSet {
+            changeKeyboardButton.setTitleColor(themeColorScheme, for: .normal)
+        }
+    }
     
     internal var categories: [Category]! {
         didSet {
@@ -153,6 +158,7 @@ extension CategoriesBottomView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         cell.setEmojiCategory(categories[indexPath.item])
+        cell.setColorScheme(themeColorScheme)
         return cell
     }
     
