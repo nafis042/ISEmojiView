@@ -14,7 +14,19 @@ final internal class RecentEmojisManager {
     
     // MARK: - Public variables
     
-    static let sharedInstance = RecentEmojisManager()
+    static var sharedInstance: RecentEmojisManager?
+    class var sharedManager : RecentEmojisManager {
+        guard let sharedInstance = self.sharedInstance else {
+            let sharedInstance = RecentEmojisManager()
+            self.sharedInstance = sharedInstance
+            return sharedInstance
+        }
+        return sharedInstance
+    }
+    
+    class func destroySharedManager() {
+        sharedInstance = nil
+    }
     
     internal var maxCountOfCenetEmojis: Int = 0
     
@@ -71,34 +83,33 @@ final internal class RecentEmojisManager {
         return data
     }
     
-    let dummyEmoji = [
-        Emoji(emojis: ["😀"]),
-        Emoji(emojis: ["😂"]),
-        Emoji(emojis: ["😅"]),
-        Emoji(emojis: ["🤩"]),
-        Emoji(emojis: ["😪"]),
-        Emoji(emojis: ["😰"]),
-        Emoji(emojis: ["👿"]),
-        Emoji(emojis: ["😻"]),
-        Emoji(emojis: ["👑"]),
-        Emoji(emojis: ["🍓"]),
-        Emoji(emojis: ["🍕"]),
-        Emoji(emojis: ["🍔"]),
-        Emoji(emojis: ["☕️"]),
-        Emoji(emojis: ["⚽️"]),
-        Emoji(emojis: ["🏸"]),
-        Emoji(emojis: ["🎾"]),
-        Emoji(emojis: ["🏆"]),
-        Emoji(emojis: ["🎹"]),
-        Emoji(emojis: ["🎸"]),
-        Emoji(emojis: ["🇧🇩"]),
-        Emoji(emojis: ["🚗"]),
-        Emoji(emojis: ["🚜"]),
-        Emoji(emojis: ["✈️"]),
-        Emoji(emojis: ["🏝"]),
-    ]
-    
     internal func recentEmojis() -> [Emoji] {
+        let dummyEmoji = [
+            Emoji(emojis: ["😀"]),
+            Emoji(emojis: ["😂"]),
+            Emoji(emojis: ["😅"]),
+            Emoji(emojis: ["🤩"]),
+            Emoji(emojis: ["😪"]),
+            Emoji(emojis: ["😰"]),
+            Emoji(emojis: ["👿"]),
+            Emoji(emojis: ["😻"]),
+            Emoji(emojis: ["👑"]),
+            Emoji(emojis: ["🍓"]),
+            Emoji(emojis: ["🍕"]),
+            Emoji(emojis: ["🍔"]),
+            Emoji(emojis: ["☕️"]),
+            Emoji(emojis: ["⚽️"]),
+            Emoji(emojis: ["🏸"]),
+            Emoji(emojis: ["🎾"]),
+            Emoji(emojis: ["🏆"]),
+            Emoji(emojis: ["🎹"]),
+            Emoji(emojis: ["🎸"]),
+            Emoji(emojis: ["🇧🇩"]),
+            Emoji(emojis: ["🚗"]),
+            Emoji(emojis: ["🚜"]),
+            Emoji(emojis: ["✈️"]),
+            Emoji(emojis: ["🏝"]),
+        ]
         guard let data = UserDefaults.standard.data(forKey: recentEmojisKey) else {
             return dummyEmoji
         }

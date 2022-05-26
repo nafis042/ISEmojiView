@@ -170,8 +170,11 @@ extension EmojiCollectionView: UICollectionViewDataSource {
         if kind == UICollectionView.elementKindSectionHeader {
              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
             sectionHeader.label.text = emojis[indexPath.section].category.title.uppercased()
+            if theme != nil {
+                sectionHeader.label.textColor = theme?.textColor
+            }
              return sectionHeader
-        } else { //No footer in this case but can add option for that
+        } else {
              return UICollectionReusableView()
         }
     }

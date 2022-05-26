@@ -52,7 +52,7 @@ public extension EmojiViewDelegate {
     
     @IBInspectable private var countOfRecentsEmojis: Int = MaxCountOfRecentsEmojis {
         didSet {
-            RecentEmojisManager.sharedInstance.maxCountOfCenetEmojis = countOfRecentsEmojis
+            RecentEmojisManager.sharedManager.maxCountOfCenetEmojis = countOfRecentsEmojis
             
             if countOfRecentsEmojis > 0 {
                 if !emojis.contains(where: { $0.category == .recents }) {
@@ -127,7 +127,7 @@ public extension EmojiViewDelegate {
             emojis.insert(EmojiLoader.recentEmojiCategory(), at: 0)
         }
         
-        RecentEmojisManager.sharedInstance.maxCountOfCenetEmojis = keyboardSettings.countOfRecentsEmojis
+        RecentEmojisManager.sharedManager.maxCountOfCenetEmojis = keyboardSettings.countOfRecentsEmojis
         
         setupView()
         setupSubviews()
@@ -159,6 +159,10 @@ public extension EmojiViewDelegate {
         
     }
     
+    deinit {
+        RecentEmojisManager.destroySharedManager()
+    }
+    
     override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         if point.y > 0 || !(emojiCollectionView?.popPreviewShowing() ?? false) {
             return super.point(inside: point, with: event)
@@ -174,8 +178,8 @@ public extension EmojiViewDelegate {
 extension EmojiView: EmojiCollectionViewDelegate {
     
     func emojiViewDidSelectEmoji(emojiView: EmojiCollectionView, emoji: Emoji, selectedEmoji: String) {
-        if RecentEmojisManager.sharedInstance.add(emoji: emoji, selectedEmoji: selectedEmoji),(keyboardSettings?.updateRecentEmojiImmediately) ?? true  {
-            emojiCollectionView?.updateRecentsEmojis(RecentEmojisManager.sharedInstance.recentEmojis())
+        if RecentEmojisManager.sharedManager.add(emoji: emoji, selectedEmoji: selectedEmoji),(keyboardSettings?.updateRecentEmojiImmediately) ?? true  {
+            emojiCollectionView?.updateRecentsEmojis(RecentEmojisManager.sharedManager.recentEmojis())
         }
         
         delegate?.emojiViewDidSelectEmoji(selectedEmoji, emojiView: self)

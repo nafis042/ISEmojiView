@@ -12,7 +12,7 @@ final public class EmojiLoader {
     static func recentEmojiCategory() -> EmojiCategory {
         return EmojiCategory(
             category: .recents,
-            emojis: RecentEmojisManager.sharedInstance.recentEmojis()
+            emojis: RecentEmojisManager.sharedManager.recentEmojis()
         )
     }
     
