@@ -136,12 +136,7 @@ internal protocol EmojiCollectionViewDelegate: class {
         }
         
         let indexPath = IndexPath(item: 0, section: section)
-//        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        if let attributes = collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath),
-                let cellAttributes = self.collectionView?.layoutAttributesForItem(at: indexPath) {
-            let scrollingPosition = CGPoint(x: cellAttributes.frame.origin.x  - collectionView.contentInset.left, y: 0.0)
-                collectionView.setContentOffset(scrollingPosition, animated: true)
-        }
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
     }
     
 }
@@ -155,6 +150,9 @@ extension EmojiCollectionView: UICollectionViewDataSource {
     }
     
     internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 && emojis[section].emojis.count < 20 {
+            return 20
+        }
         return emojis[section].emojis.count
     }
     
@@ -190,11 +188,13 @@ extension EmojiCollectionView: UICollectionViewDataSource {
     }
     
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let emojiCategory = emojis[indexPath.section]
-        let emoji = emojiCategory.emojis[indexPath.item]
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: emojiCellReuseIdentifier, for: indexPath) as! EmojiCollectionCell
-        
+        let emojiCategory = emojis[indexPath.section]
+        if emojiCategory.emojis.count <= indexPath.item {
+            cell.setEmoji("")
+            return cell
+        }
+        let emoji = emojiCategory.emojis[indexPath.item]
         if let selectedEmoji = emoji.selectedEmoji {
             cell.setEmoji(selectedEmoji)
         } else {
@@ -316,6 +316,9 @@ extension EmojiCollectionView {
         }
         
         let emojiCategory = emojis[indexPath.section]
+        if emojiCategory.emojis.count <= indexPath.row {
+            return
+        }
         let emoji = emojiCategory.emojis[indexPath.item]
         delegate?.emojiViewDidSelectEmoji(emojiView: self, emoji: emoji, selectedEmoji: emoji.selectedEmoji ?? emoji.emoji)
     }
