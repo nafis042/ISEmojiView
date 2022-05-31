@@ -316,7 +316,7 @@ extension EmojiCollectionView {
         }
         
         let emojiCategory = emojis[indexPath.section]
-        if emojiCategory.emojis.count <= indexPath.row {
+        if emojiCategory.emojis.count <= indexPath.item {
             return
         }
         let emoji = emojiCategory.emojis[indexPath.item]
