@@ -183,7 +183,7 @@ extension EmojiCollectionView: UICollectionViewDataSource {
                                                options: [.usesLineFragmentOrigin, .usesFontLeading, .usesDeviceMetrics], context: nil).integral
         var messageContainerSize = CGSize()
         messageContainerSize = rect.size
-        messageContainerSize.width += 45
+        messageContainerSize.width += 29
         return messageContainerSize
     }
     
@@ -244,7 +244,7 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
         var inset = UIEdgeInsets.zero
         inset.left = 0
         inset.top = 20
-        inset.right = 32
+        inset.right = 16
         let attributedString = NSAttributedString(string: emojis[section].category.title.uppercased(), attributes: [
             .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
         ])
@@ -408,7 +408,7 @@ class SectionHeader: UICollectionReusableView {
          label.translatesAutoresizingMaskIntoConstraints = false
          label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
          label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13).isActive = true
-         label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
+         label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
