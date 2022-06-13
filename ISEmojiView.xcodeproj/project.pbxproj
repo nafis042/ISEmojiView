@@ -29,6 +29,10 @@
 		0D7B3267227544EF0040F427 /* EmojiCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7B3264227544EF0040F427 /* EmojiCollectionView.xib */; };
 		0D7B3268227544EF0040F427 /* CategoriesBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7B3265227544EF0040F427 /* CategoriesBottomView.xib */; };
 		0D9FB68223125CB20076FFA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D9FB68123125CB20076FFA8 /* Images.xcassets */; };
+		4598F6BF28572BAF00F9F1AD /* emoji_15_4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4598F6BB28572BAF00F9F1AD /* emoji_15_4.plist */; };
+		4598F6C028572BAF00F9F1AD /* emoji_14_5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4598F6BC28572BAF00F9F1AD /* emoji_14_5.plist */; };
+		4598F6C128572BAF00F9F1AD /* emoji_14_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4598F6BD28572BAF00F9F1AD /* emoji_14_2.plist */; };
+		4598F6C228572BAF00F9F1AD /* emoji_13_2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4598F6BE28572BAF00F9F1AD /* emoji_13_2.plist */; };
 		E9094FBF229297EE00634195 /* ISEmojiList_iOS11.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9094FBE229297EE00634195 /* ISEmojiList_iOS11.plist */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,10 @@
 		0D7B3264227544EF0040F427 /* EmojiCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCollectionView.xib; sourceTree = "<group>"; };
 		0D7B3265227544EF0040F427 /* CategoriesBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoriesBottomView.xib; sourceTree = "<group>"; };
 		0D9FB68123125CB20076FFA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4598F6BB28572BAF00F9F1AD /* emoji_15_4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji_15_4.plist; sourceTree = "<group>"; };
+		4598F6BC28572BAF00F9F1AD /* emoji_14_5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji_14_5.plist; sourceTree = "<group>"; };
+		4598F6BD28572BAF00F9F1AD /* emoji_14_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji_14_2.plist; sourceTree = "<group>"; };
+		4598F6BE28572BAF00F9F1AD /* emoji_13_2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji_13_2.plist; sourceTree = "<group>"; };
 		E9094FBE229297EE00634195 /* ISEmojiList_iOS11.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ISEmojiList_iOS11.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +221,10 @@
 				0D7B3262227544EF0040F427 /* Views */,
 				0D3A9A892115E36100279297 /* ISEmojiList.plist */,
 				E9094FBE229297EE00634195 /* ISEmojiList_iOS11.plist */,
+				4598F6BE28572BAF00F9F1AD /* emoji_13_2.plist */,
+				4598F6BD28572BAF00F9F1AD /* emoji_14_2.plist */,
+				4598F6BC28572BAF00F9F1AD /* emoji_14_5.plist */,
+				4598F6BB28572BAF00F9F1AD /* emoji_15_4.plist */,
 				0D3A9A8A2115E36100279297 /* ISEmojiList_iOS10.plist */,
 				0D9FB68123125CB20076FFA8 /* Images.xcassets */,
 			);
@@ -312,8 +324,12 @@
 				0D3A9ABC2115E36200279297 /* ISEmojiList_iOS10.plist in Resources */,
 				0D7B3267227544EF0040F427 /* EmojiCollectionView.xib in Resources */,
 				0D7B3268227544EF0040F427 /* CategoriesBottomView.xib in Resources */,
+				4598F6C128572BAF00F9F1AD /* emoji_14_2.plist in Resources */,
+				4598F6C028572BAF00F9F1AD /* emoji_14_5.plist in Resources */,
 				E9094FBF229297EE00634195 /* ISEmojiList_iOS11.plist in Resources */,
+				4598F6BF28572BAF00F9F1AD /* emoji_15_4.plist in Resources */,
 				0D7B3266227544EF0040F427 /* PageControlBottomView.xib in Resources */,
+				4598F6C228572BAF00F9F1AD /* emoji_13_2.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
