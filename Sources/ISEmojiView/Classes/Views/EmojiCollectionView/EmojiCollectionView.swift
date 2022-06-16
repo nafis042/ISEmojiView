@@ -74,6 +74,8 @@ internal protocol EmojiCollectionViewDelegate: class {
             collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
             let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
             layout?.sectionHeadersPinToVisibleBounds = true
+            collectionView.allowsSelection = false
+            collectionView.allowsMultipleSelection = true
         }
     }
     
@@ -200,7 +202,17 @@ extension EmojiCollectionView: UICollectionViewDataSource {
         } else {
             cell.setEmoji(emoji.emoji)
         }
-        
+        cell.cellTapped = { [weak self] in
+            guard let self = self else { return }
+            guard self.emojiPopView.isHidden else {
+                self.dismissPopView(false)
+                return
+            }
+            let emojiCategory = self.emojis[indexPath.section]
+            let emoji = emojiCategory.emojis[indexPath.item]
+            
+            self.delegate?.emojiViewDidSelectEmoji(emojiView: self, emoji: emoji, selectedEmoji: emoji.selectedEmoji ?? emoji.emoji)
+        }
         return cell
     }
 
@@ -212,15 +224,15 @@ extension EmojiCollectionView: UICollectionViewDataSource {
 extension EmojiCollectionView: UICollectionViewDelegate {
     
     internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard emojiPopView.isHidden else {
-            dismissPopView(false)
-            return
-        }
-        
-        let emojiCategory = emojis[indexPath.section]
-        let emoji = emojiCategory.emojis[indexPath.item]
-        
-        delegate?.emojiViewDidSelectEmoji(emojiView: self, emoji: emoji, selectedEmoji: emoji.selectedEmoji ?? emoji.emoji)
+//        guard emojiPopView.isHidden else {
+//            dismissPopView(false)
+//            return
+//        }
+//
+//        let emojiCategory = emojis[indexPath.section]
+//        let emoji = emojiCategory.emojis[indexPath.item]
+//
+//        delegate?.emojiViewDidSelectEmoji(emojiView: self, emoji: emoji, selectedEmoji: emoji.selectedEmoji ?? emoji.emoji)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -252,6 +264,12 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
         inset.left -= labelSize.width
         return inset
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let n = Int((collectionView.bounds.height - 20) / 35)
+        return CGSize(width: 35, height: (collectionView.bounds.height - 20) / CGFloat(n))
+    }
+    
 }
 
 // MARK: - UIScrollView
@@ -404,6 +422,7 @@ class SectionHeader: UICollectionReusableView {
 
      override init(frame: CGRect) {
          super.init(frame: frame)
+         isUserInteractionEnabled = false
          addSubview(label)
          label.translatesAutoresizingMaskIntoConstraints = false
          label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

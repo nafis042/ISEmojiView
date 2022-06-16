@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-internal class EmojiCollectionCell: UICollectionViewCell {
+internal class EmojiCollectionCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     // MARK: - Private variables
     
@@ -19,6 +19,8 @@ internal class EmojiCollectionCell: UICollectionViewCell {
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return label
     }()
+    
+    var cellTapped: () -> (Void) = {}
     
     // MARK: - Override functions
     
@@ -43,6 +45,14 @@ internal class EmojiCollectionCell: UICollectionViewCell {
     private func setupView() {
         emojiLabel.frame = bounds
         addSubview(emojiLabel)
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                          action: #selector(handleTap(recognizer:)))
+        tapGesture.delegate = self
+        emojiLabel.isUserInteractionEnabled = true
+        emojiLabel.addGestureRecognizer(tapGesture)
     }
     
+    @objc func handleTap(recognizer:UITapGestureRecognizer) {
+        self.cellTapped()
+      }
 }
