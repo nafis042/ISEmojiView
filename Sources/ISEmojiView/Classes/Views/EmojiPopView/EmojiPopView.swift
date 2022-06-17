@@ -102,7 +102,7 @@ extension EmojiPopView {
             let previouslySelectedButton = emojiButtons.first { $0.isSelected }
             emojiButtons.forEach {
                 $0.isSelected = $0.frame.insetBy(dx: 0, dy: -80).contains(point)
-                $0.backgroundColor = $0.isSelected ? theme!.popupSelectedSelectedBackgroundColor : .clear
+                $0.backgroundColor = $0.isSelected ? theme!.specialKeyColor : .clear
             }
             let selectedButton = emojiButtons.first { $0.isSelected }
             if let selectedButton = selectedButton, selectedButton != previouslySelectedButton {
