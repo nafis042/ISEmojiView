@@ -78,8 +78,9 @@ public extension EmojiViewDelegate {
             guard theme != nil else {
                 return
             }
-            categoriesBottomView?.themeColorScheme = theme!.textColor
+            categoriesBottomView?.themeColorScheme = theme!.suggestionTextColor
             categoriesBottomView?.themeBackgroundColor = theme!.normalKeyBackgroundColor
+            categoriesBottomView?.themeSelectedColorScheme = theme!.textColor
             emojiCollectionView?.theme = theme!
         }
     }

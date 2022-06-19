@@ -38,26 +38,29 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
         emojiView.translatesAutoresizingMaskIntoConstraints = false
         emojiView.delegate = self
         emojiView.theme = Theme(
-            name: "Dark",
-            key: "dark",
-            backgroundColor: [["#2B2B2B", "#2B2B2B"]],
-            keyBackground: "dark_key",
+            name: "Dark Fossil",
+            key:"dark_fossil",
+            backgroundColor: [["#DFDAC7", "#DFDAC7"]],
+            keyBackground: "light_key",
             arrow: "light_arrow",
-            textColor: UIColor.white,
-            hintColor: UIColor.lightGray,
-            suggestionBorderColor: UIColor(hex: "#434343")!,
-            suggestionTextColor: UIColor.white,
-            suggestionSelectedBackgroundColor: UIColor(hex: "#434343")!,
-            suggestionSelectedTextColor: UIColor.white,
-            popupBackgroundColor: UIColor(hex: "#434343")!,
+            textColor: UIColor(hex: "#DFDAC7")!,
+            hintColor: .gray,
+            suggestionBorderColor:.gray,
+            suggestionTextColor: UIColor(hex: "#41444B")!,
+            suggestionSelectedBackgroundColor: UIColor(hex: "#1C1C1E")!,
+            suggestionSelectedTextColor: .white,
+            popupBackgroundColor: UIColor(hex: "#B0AC9B")!,
             popupSelectedSelectedBackgroundColor: .black.withAlphaComponent(0.15),
             popupShadowColor: .black.withAlphaComponent(0.25),
-            popupStrokeColor: .red.withAlphaComponent(0.3),
-            normalKeyBackgroundColor: UIColor(hex: "#434343")!,
-            specialKeyBackgroundColor: UIColor(hex: "#252424")!,
-            shadowColor: .black,
-            shadowOpacity: 0.3,
-            specialKeyColor: .white
+            popupStrokeColor: .clear,
+            normalKeyBackgroundColor: UIColor(hex: "#41444B")!,
+            specialKeyBackgroundColor: UIColor(hex: "#41444B")!,
+            shadowColor: .white,
+            shadowOpacity: 0,
+            shadowOffset: CGSize(width: 1, height: 1),
+            specialKeyColor: UIColor(hex: "#DFDAC7")!,
+            borderColor: .clear,
+            gradientDirection: 3
         )
         textView.inputView = emojiView
     }

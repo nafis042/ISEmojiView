@@ -80,9 +80,9 @@ internal class CategoryCell: UICollectionViewCell {
         emojiImageView.image = image?.withRenderingMode(.alwaysTemplate)
     }
     
-    internal func setColorScheme(_ color: UIColor, _ backgroundColor: UIColor) {
+    internal func setColorScheme(_ color: UIColor, _ backgroundColor: UIColor, _ unselectedColor: UIColor) {
         ImageActiveTintColor = color
-        ImageNonActiveTintColor = color
+        ImageNonActiveTintColor = unselectedColor
         highlightedBackgroundView.backgroundColor = backgroundColor
         emojiImageView.tintColor = isSelected ? ImageActiveTintColor : ImageNonActiveTintColor
     }

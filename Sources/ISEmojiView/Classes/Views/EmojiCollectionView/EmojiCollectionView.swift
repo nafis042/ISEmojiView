@@ -171,7 +171,7 @@ extension EmojiCollectionView: UICollectionViewDataSource {
              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
             sectionHeader.label.text = emojis[indexPath.section].category.title.uppercased()
             if theme != nil {
-                sectionHeader.label.textColor = theme?.textColor
+                sectionHeader.label.textColor = theme?.suggestionTextColor
             }
              return sectionHeader
         } else {
