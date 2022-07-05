@@ -19,8 +19,6 @@ public class Theme : NSObject {
     @objc let hintColor: UIColor
     @objc let suggestionBorderColor: UIColor
     @objc let suggestionTextColor: UIColor
-    @objc let suggestionSelectedBackgroundColor: UIColor
-    @objc let suggestionSelectedTextColor: UIColor
     @objc let popupBackgroundColor: UIColor
     @objc let popupSelectedSelectedBackgroundColor: UIColor
     @objc let popupShadowColor: UIColor
@@ -35,7 +33,7 @@ public class Theme : NSObject {
     @objc let gradientDirection: Int
 
     
-    public init(name: String, key: String, backgroundColor: [[String]], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, suggestionSelectedBackgroundColor: UIColor, suggestionSelectedTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
+    public init(name: String, key: String, backgroundColor: [[String]], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
         self.name = name;
         self.key = key;
         self.backgroundColor = backgroundColor
@@ -43,8 +41,6 @@ public class Theme : NSObject {
         self.hintColor = hintColor;
         self.suggestionTextColor = suggestionTextColor;
         self.suggestionBorderColor = suggestionBorderColor;
-        self.suggestionSelectedTextColor = suggestionSelectedTextColor;
-        self.suggestionSelectedBackgroundColor = suggestionSelectedBackgroundColor;
         self.popupBackgroundColor = popupBackgroundColor;
         self.popupShadowColor = popupShadowColor;
         self.popupStrokeColor = popupStrokeColor;

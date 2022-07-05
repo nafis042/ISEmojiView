@@ -47,8 +47,6 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
             hintColor: .gray,
             suggestionBorderColor:.gray,
             suggestionTextColor: UIColor(hex: "#41444B")!,
-            suggestionSelectedBackgroundColor: UIColor(hex: "#1C1C1E")!,
-            suggestionSelectedTextColor: .white,
             popupBackgroundColor: UIColor(hex: "#B0AC9B")!,
             popupSelectedSelectedBackgroundColor: .black.withAlphaComponent(0.15),
             popupShadowColor: .black.withAlphaComponent(0.25),
