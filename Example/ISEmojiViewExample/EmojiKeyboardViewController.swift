@@ -40,7 +40,7 @@ class EmojiKeyboardViewController: UIViewController, EmojiViewDelegate {
         emojiView.theme = Theme(
             name: "Dark Fossil",
             key:"dark_fossil",
-            backgroundColor: [["#DFDAC7", "#DFDAC7"]],
+            backgroundColor: ["#DFDAC7", "#DFDAC7"],
             keyBackground: "light_key",
             arrow: "light_arrow",
             textColor: UIColor(hex: "#DFDAC7")!,

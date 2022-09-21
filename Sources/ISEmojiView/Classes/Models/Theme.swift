@@ -12,7 +12,7 @@ public class Theme : NSObject {
     
     @objc let name: String
     @objc let key: String
-    @objc let backgroundColor: [[String]]
+    @objc let backgroundColor: [String]
     @objc let keyBackground: String
     @objc let arrow: String
     @objc let textColor: UIColor
@@ -33,7 +33,7 @@ public class Theme : NSObject {
     @objc let gradientDirection: Int
 
     
-    public init(name: String, key: String, backgroundColor: [[String]], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
+    @objc public init(name: String, key: String, backgroundColor: [String], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
         self.name = name;
         self.key = key;
         self.backgroundColor = backgroundColor
