@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 internal let EmojiSize = CGSize(width: 35, height: 35)
-internal let EmojiFont = UIFont(name: "Apple color emoji", size: 30)
+internal let EmojiFont = UIFont(name: "Apple color emoji", size: 15)
 internal let TopPartSize = CGSize(width: EmojiSize.width * 1.3, height: EmojiSize.height * 1.6)
 internal let BottomPartSize = CGSize(width: EmojiSize.width * 1.0, height: EmojiSize.height + 10)
 internal let EmojiPopViewSize = CGSize(width: TopPartSize.width, height: TopPartSize.height + BottomPartSize.height)

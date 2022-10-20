@@ -14,9 +14,10 @@ internal class EmojiCollectionCell: UICollectionViewCell, UIGestureRecognizerDel
     
     private lazy var emojiLabel: UILabel = {
         let label = UILabel()
-        label.font = EmojiFont
+//        label.font = EmojiFont
         label.textAlignment = .center
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
         return label
     }()
     
