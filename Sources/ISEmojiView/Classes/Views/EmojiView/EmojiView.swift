@@ -79,7 +79,7 @@ public extension EmojiViewDelegate {
                 return
             }
             categoriesBottomView?.themeColorScheme = theme!.suggestionTextColor
-            categoriesBottomView?.themeBackgroundColor = theme!.normalKeyBackgroundColor
+            categoriesBottomView?.themeBackgroundColor = theme!.selectedBackgroundColor
             categoriesBottomView?.themeSelectedColorScheme = theme!.textColor
             emojiCollectionView?.theme = theme!
         }

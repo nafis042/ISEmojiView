@@ -17,7 +17,7 @@ internal class EmojiCollectionCell: UICollectionViewCell, UIGestureRecognizerDel
 //        label.font = EmojiFont
         label.textAlignment = .center
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        label.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        label.transform = UIDevice.current.userInterfaceIdiom == .pad ? CGAffineTransform(scaleX: 1.75, y: 1.75) : CGAffineTransform(scaleX: 1.25, y: 1.25)
         return label
     }()
     

@@ -255,10 +255,10 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         var inset = UIEdgeInsets.zero
         inset.left = 0
-        inset.top = 20
+        inset.top = 40
         inset.right = 16
         let attributedString = NSAttributedString(string: emojis[section].category.title.uppercased(), attributes: [
-            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .font: UIFont.systemFont(ofSize: 15, weight: .semibold)
         ])
         let labelSize = labelSize(for: attributedString)
         inset.left -= labelSize.width
@@ -266,8 +266,9 @@ extension EmojiCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let n = Int((collectionView.bounds.height - 20) / 35)
-        return CGSize(width: 35, height: (collectionView.bounds.height - 20) / CGFloat(n))
+        let height: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 35
+        let n = Int((collectionView.bounds.height - 20) / height)
+        return CGSize(width: height, height: (collectionView.bounds.height - 20) / CGFloat(n))
     }
     
 }
@@ -418,7 +419,7 @@ class SectionHeader: UICollectionReusableView {
      var label: UILabel = {
          let label: UILabel = UILabel()
          label.textColor = UIColor(red: 145/255, green: 145/255, blue: 145/255, alpha: 1.0)
-         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
          label.sizeToFit()
          return label
      }()
@@ -431,6 +432,7 @@ class SectionHeader: UICollectionReusableView {
          label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
          label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 13).isActive = true
          label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+         label.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

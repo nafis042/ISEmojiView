@@ -10,6 +10,7 @@ import UIKit
 @objc(ThemeData)
 public class Theme : NSObject {
     
+    @objc let type: Int
     @objc let name: String
     @objc let key: String
     @objc let backgroundColor: [String]
@@ -32,8 +33,15 @@ public class Theme : NSObject {
     @objc let borderColor: UIColor
     @objc let gradientDirection: Int
 
+    var selectedBackgroundColor: UIColor {
+        if (type == 5) {
+            return normalKeyBackgroundColor
+        }
+        return popupBackgroundColor
+    }
     
-    @objc public init(name: String, key: String, backgroundColor: [String], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
+    @objc public init(type: Int, name: String, key: String, backgroundColor: [String], keyBackground:String, arrow: String, textColor: UIColor, hintColor: UIColor, suggestionBorderColor: UIColor, suggestionTextColor: UIColor, popupBackgroundColor: UIColor, popupSelectedSelectedBackgroundColor: UIColor, popupShadowColor:UIColor, popupStrokeColor: UIColor, normalKeyBackgroundColor: UIColor, specialKeyBackgroundColor: UIColor, shadowColor: UIColor, shadowOpacity: CGFloat, shadowOffset: CGSize = CGSize(width: 0, height: 1), specialKeyColor: UIColor, borderColor: UIColor = .clear, gradientDirection: Int = 4) {
+        self.type = type
         self.name = name;
         self.key = key;
         self.backgroundColor = backgroundColor
